@@ -40,7 +40,7 @@ void fitAllQuadricTypes(TriangleMesh &mesh, std::vector<Quadric> &quadrics);
 In both cases, the fitted quadrics are returned by reference.
 If you are using one of the fitAllQuadricTypes functions, use the enumerator of quadric types to select specific quadric types -- i.e., if you want a hyperboloid, then access quadric[TYPE_HYPERBOLOID_OPT]
 
-4. optionally use the Quadric class's member functions to help transform or render the quadric
+4. optionally use the Quadric struct's member functions to help transform or render the quadric
 
 Extra Feature: If you are fitting a quadric to a TriangleMesh, but only want to fit a specific selection of that mesh, you can use the triangleTags and activeTag members of the TriangleMesh struct.  See the comments in the TriangleMesh struct for details, and the end of aqd_example.cpp for an example of how to do this.
 
