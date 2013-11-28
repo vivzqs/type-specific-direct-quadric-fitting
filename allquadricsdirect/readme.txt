@@ -3,7 +3,6 @@ This is a library demonstrating the quadric fitting methods in the paper:
 "Type-Constrained Direct Fitting of Quadric Surfaces" 
 by James Andrews and Carlo Sequin.
 
-This initial release is fairly bare-bones, 'research code' which is not optimized and not thoroughly tested.
 
 
 BUILD INSTRUCTIONS:
@@ -28,23 +27,22 @@ USAGE INSTRUCTIONS:
 
 1. include "quadricfitting.h" and link against this library
 
-2. initialize a std::vector of Quadric objects
+2. CENTER AND RESCALE YOUR DATA! (I don't do this for you!)
 
-3. CENTER AND RESCALE YOUR DATA! (I don't do this for you!)
-
-4. pass the data you want to fit to one of these functions:
-void fitAllQuadricTypes(std::vector<data_pnw> &data, std::vector<Quadric> &quadrics);
-void fitAllQuadricTypes(TriangleMesh &mesh, std::vector<Quadric> &quadrics);
-
-OR if you just want a specific fit, use one of the functions like
+3. pass the data you want to fit and a Quadric struct to one of the fit* functions, like:
 void fitSphere(std::vector<data_pnw> &data, Quadric &quadric);
 void fitSphere(TriangleMesh &mesh, Quadric &quadric);
 
-5. If you fit *all* the quadrics at once, use the enumerator of quadric types to find the quadric fits you want -- i.e., if you want a hyperboloid, then access quadric[TYPE_HYPERBOLOID_OPT]
+If you want to fit all the quadric types at once, use one of these:
+void fitAllQuadricTypes(std::vector<data_pnw> &data, std::vector<Quadric> &quadrics);
+void fitAllQuadricTypes(TriangleMesh &mesh, std::vector<Quadric> &quadrics);
 
-6. optionally use the Quadric class's member functions to help transform or render the quadric
+In both cases, the fitted quadrics are returned by reference.
+If you are using one of the fitAllQuadricTypes functions, use the enumerator of quadric types to select specific quadric types -- i.e., if you want a hyperboloid, then access quadric[TYPE_HYPERBOLOID_OPT]
 
-If you only want to fit a specific selection of a mesh, use the triangleTags and activeTag members of the TriangleMesh struct.  See the comments in the TriangleMesh struct for details, and the end of aqd_example.cpp for an example of how to do this.
+4. optionally use the Quadric class's member functions to help transform or render the quadric
+
+Extra Feature: If you are fitting a quadric to a TriangleMesh, but only want to fit a specific selection of that mesh, you can use the triangleTags and activeTag members of the TriangleMesh struct.  See the comments in the TriangleMesh struct for details, and the end of aqd_example.cpp for an example of how to do this.
 
 
 
@@ -66,10 +64,4 @@ zaphos@gmail.com
 
 CAVEAT EMPTOR:
 
-Note that this code hasn't been extensively tested, or even (as far as I know) compiled by anyone other than me as of my writing this readme.  I hope it works well as is, but let me know if there are issues and I may be able to help.
-
-
-
-ROADMAP:
-
-I don't have specific plans to extend this library, although I'm open to adding to it if I receive any feature requests.
+Note that this code hasn't been extensively tested.  I hope it works well as is, but let me know if there are issues and I may be able to help.
